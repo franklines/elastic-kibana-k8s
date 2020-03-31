@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: elasticsearch-configmap
+  labels:
+    env: dev
+data:
+  discovery.type: single-node

@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kibana-deployment
+  labels:
+    app: kibana
+    env: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kibana
+  template:
+    metadata:
+      labels:
+        app: kibana
+    spec:
+      containers:
+      - name: kibana
+        image: kibana:7.6.1
+        env: 
+        - name: ELASTICSEARCH_HOSTS
+          valueFrom:
+            configMapKeyRef:
+              name: kibana-configmap
+              key: elasticsearch.host
+        ports:
+          - name: kport
+            containerPort: 5601
+#        readinessProbe:
+#          tcpSocket:
+#            port: 5601
+#          initialDelaySeconds: 10
+#          periodSeconds: 10
+#        livenessProbe:
+#          httpGet:
+#            path: /status
+#            port: kport
+#          failureThreshold: 3
+#          periodSeconds: 10

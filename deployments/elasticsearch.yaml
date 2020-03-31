@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: elasticsearch-deployment
+  labels:
+    app: elasticsearch
+    env: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: elasticsearch
+  template:
+    metadata:
+      labels:
+        app: elasticsearch
+    spec:
+      containers:
+      - name: elasticsearch
+        image: elasticsearch:7.6.1
+        env: 
+        - name: discovery.type
+          valueFrom:
+            configMapKeyRef:
+              name: elasticsearch-configmap
+              key: discovery.type
+        ports:
+          - name: esport
+            containerPort: 9200
+        readinessProbe:
+          tcpSocket:
+            port: 9200
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /_cat/health
+            port: esport
+          failureThreshold: 3
+          periodSeconds: 10

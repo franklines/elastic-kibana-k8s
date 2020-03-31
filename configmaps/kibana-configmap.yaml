@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kibana-configmap
+  labels:
+    env: dev
+data:
+  elasticsearch.host: http://elasticsearch-service:9200

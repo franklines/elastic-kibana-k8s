@@ -3,6 +3,7 @@ kind: ConfigMap
 metadata:
   name: kibana-configmap
   labels:
+    app: kibana
     env: dev
 data:
-  elasticsearch.host: http://elasticsearch-service:9200
+  elasticsearch.host: http://elasticsearch:9200

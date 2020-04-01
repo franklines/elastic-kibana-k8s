@@ -3,6 +3,7 @@ kind: ConfigMap
 metadata:
   name: elasticsearch-configmap
   labels:
+    app: elasticsearch
     env: dev
 data:
   discovery.type: single-node

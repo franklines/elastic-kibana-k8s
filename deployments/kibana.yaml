@@ -27,14 +27,14 @@ spec:
         ports:
           - name: kport
             containerPort: 5601
-#        readinessProbe:
-#          tcpSocket:
-#            port: 5601
-#          initialDelaySeconds: 10
-#          periodSeconds: 10
-#        livenessProbe:
-#          httpGet:
-#            path: /status
-#            port: kport
-#          failureThreshold: 3
-#          periodSeconds: 10
+        readinessProbe:
+          tcpSocket:
+            port: 5601
+          initialDelaySeconds: 120
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /status
+            port: kport
+          failureThreshold: 5
+          periodSeconds: 20

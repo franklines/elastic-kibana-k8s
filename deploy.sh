@@ -5,6 +5,7 @@ set -u
 function deleteAll()
 {
     kubectl delete service elasticsearch;
+    kubectl delete service kibana;
     kubectl delete deployment elasticsearch-deployment;
     kubectl delete deployment kibana-deployment;
     kubectl delete configmap kibana-configmap;

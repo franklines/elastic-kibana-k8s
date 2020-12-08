@@ -24,12 +24,10 @@ function deployAll()
         kubectl apply -f deployments/${dep};
     done
 
-
     for svc in `ls services/`;
     do
         kubectl apply -f services/${svc};
     done
-
 }
 
 while getopts "dr" opt; do
